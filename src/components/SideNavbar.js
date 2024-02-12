@@ -1,18 +1,18 @@
 import "./sidebar.css";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Experience from "./Experience";
 const SideNavbar = () => {
+  const [activePage, setActivePage] = useState("Home");
   return (
-    <div class="sidebar">
-      <a class="active" href="#home">
+    <div className="sidebar">
+      <Link className={activePage === "Home" ? "active" : ""} to="/" onClick={() => setActivePage("Home")}>
         Home
-      </a>
-      <Link to="/project">Helo</Link>
-      <a href="/projects">Projects</a>
-      <a href="/experience">Experience</a>
-      <a href="/contact">Contact</a>
-      <a href="/resume">Download my Resume</a>
-      <a href="/about">About Me</a>
+      </Link>
+      <Link to="/projects" className={activePage === "Projects" ? "active" : ""} onClick={() => setActivePage("Projects")}>Projects</Link>
+      <Link to="/experience" className={activePage === "Experience" ? "active" : ""} onClick={() => setActivePage("Experience")}>Experience</Link>
+      <Link to="/contact" className={activePage === "Contact" ? "active" : ""} onClick={() => setActivePage("Contact")}>Contact</Link>
+      <Link to="/resume" className={activePage === "Resume" ? "active" : ""} onClick={() => setActivePage("Resume")}>Download my Resume</Link>
+      <Link to="/about" className={activePage === "About" ? "active" : ""} onClick={() => setActivePage("About")}>About Me</Link>
     </div>
   );
 };

@@ -10,5 +10,7 @@
 }
 
 .maincontent{
-    flex: 10
+    flex: 10;
+    background-color: rgb(45, 62, 115);
+    padding-left: 5px;
 }
