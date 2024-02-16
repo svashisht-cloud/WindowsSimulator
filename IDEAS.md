@@ -7,3 +7,11 @@
 7. Make sizebar size easy to modify. Just like vs code.
 8. Change font size/style
 9. Add three js somehow.
+10. On the home page.. either have a picture that you can click to open the editor or have a code block where we can type code . to open the introduction. So much fun
+
+
+Windows display:
+1. Start bar
+2. Time bar
+3. Folder viewer
+4. Lets see where we go

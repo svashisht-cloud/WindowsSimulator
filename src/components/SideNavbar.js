@@ -2,17 +2,32 @@ import "./sidebar.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 const SideNavbar = () => {
+  const SideBarOptions = [
+    {
+      name: "Projects"
+    },
+    {
+      name: "Experience"
+    },
+    {
+      name: "Contact"
+    },
+    {
+      name: "Resume"
+    },
+    {
+      name: "About"
+    }
+  ];
   const [activePage, setActivePage] = useState("Home");
   return (
     <div className="sidebar">
       <Link className={activePage === "Home" ? "active" : ""} to="/" onClick={() => setActivePage("Home")}>
-        Home
+        Shubh Vashisht
       </Link>
-      <Link to="/projects" className={activePage === "Projects" ? "active" : ""} onClick={() => setActivePage("Projects")}>Projects</Link>
-      <Link to="/experience" className={activePage === "Experience" ? "active" : ""} onClick={() => setActivePage("Experience")}>Experience</Link>
-      <Link to="/contact" className={activePage === "Contact" ? "active" : ""} onClick={() => setActivePage("Contact")}>Contact</Link>
-      <Link to="/resume" className={activePage === "Resume" ? "active" : ""} onClick={() => setActivePage("Resume")}>Download my Resume</Link>
-      <Link to="/about" className={activePage === "About" ? "active" : ""} onClick={() => setActivePage("About")}>About Me</Link>
+      {SideBarOptions.map(ell => {
+        return <Link to={`${ell.name}`} className={activePage === `${ell.name}` ? "active" : ""} onClick={() => setActivePage(`${ell.name}`)}>{ell.name}</Link>;
+      })}
     </div>
   );
 };

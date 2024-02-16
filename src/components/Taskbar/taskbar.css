@@ -1,0 +1,77 @@
+.windowsTaskbar {
+    width: 100%;
+    height: 2.5%;
+    /* position: absolute; */
+    bottom: 0px;
+    /* border-style: outset; */
+    background-color: rgb(5, 82, 169);
+    display: flex;
+    box-sizing: border-box;
+}
+
+.taskbarElement{
+    height: 100%;
+    width: 100%;
+}
+
+.windowsStart {
+    flex: 1;
+    background-color: green;
+    /* text-align: center; */
+    overflow: hidden;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    font-size: 2.5em;
+    font-style: italic;
+    font-weight: bold;
+    border: 2px solid rgba(12, 81, 6, 0.85);
+    box-sizing: border-box;
+}
+
+.startButtonContent{
+    margin-top: 0.1em;
+    margin-left: 0.4em;
+    /* transform: translate(0, 20%); */
+}
+
+.windowsLogoTaskbar {
+    height:1em;
+    margin: auto;
+}
+
+.windowsStart:hover{
+    color: black;
+    background-color: lightgreen;
+}
+
+.windowsManager{
+    box-sizing: border-box;
+    flex: 12;
+    background-color: rgb(5, 82, 169);
+    border: 2px solid rgba(10, 44, 138, 0.85);
+}
+
+.windowsUtility {
+    flex: 2;
+    display: flex;
+    background-color: rgb(6, 143, 222);
+    border: 2px solid rgba(18, 69, 209, 0.85);
+    box-sizing: border-box;
+}
+
+.utilitiesUtility{
+    flex: 2;
+    display: flex;
+    /* justify-content: center; */
+}
+
+.utilitiesTime{
+    flex:1;
+    display: flex;
+    font-size: 150%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}

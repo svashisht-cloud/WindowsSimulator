@@ -1,0 +1,33 @@
+:root {
+    --file-hover-background-color: rgba(255,255,255,0.4);
+    --file-selected-background-color: rgba(223, 85, 55, 0.4);
+    --main-text-color: #fff;
+  }
+.windowsFile:hover{
+    /* border: 1px solid black; */
+    background-color: var(--file-hover-background-color);
+    background-blend-mode: screen;
+}
+
+.windowsFile{
+    position: absolute;
+    top:  5vh;
+    left: 5vw
+}
+
+.windowsFileLogo {
+    height: 5vh;
+    pointer-events: none;
+}
+
+.windowsFileText {
+    font-size: 1.5vh;
+    color: rgb(0, 0, 0);
+    pointer-events: none;
+}
+
+.selectedWindowFile {
+    background-color: var(--file-selected-background-color);
+    background-blend-mode: screen;
+    border: 1px;
+}
