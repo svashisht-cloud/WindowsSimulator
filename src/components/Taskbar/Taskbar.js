@@ -3,6 +3,8 @@ import './taskbar.css';
 const Taskbar = (props) => {
     const [currentDate, setCurrentDate] = useState(null);
     useEffect(() => {
+        console.log(props.openWindows);
+        console.log("rerendered task bar");
         setInterval(() => {
             setCurrentDate(new Date());
         }, 1000);
@@ -10,16 +12,17 @@ const Taskbar = (props) => {
 
     return <div className="windowsTaskbar">
         <div className='taskbarElement windowsStart'>
-            <div className='startButtonContent'>
+            <div className='startButtonContent' onClick={props.onStartClick}>
                 <img className='windowsLogoTaskbar' src="windowsLogo.png" alt="Cinque Terre" unselectable='on' ></img>
                 start
             </div>
         </div>
 
         <div className='taskbarElement windowsManager'>
-            {props.openWindows && props.openWindows.map(ell => <div>
-                window open
-            </div>)}
+            {props.openWindows && props.openWindows.map(ell =>
+                <div className='windowsManagerElement' onClick={() => props.onWindowClick(ell.name)}>
+                    <img className='taskbarWindowsLogo' src={ell.logo} alt="Cinque Terre" unselectable='on' ></img>
+                </div>)}
         </div>
 
         <div className='taskbarElement windowsUtility'>

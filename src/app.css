@@ -6,6 +6,8 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 /* 
 .sidebar{

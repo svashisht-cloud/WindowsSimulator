@@ -13,6 +13,7 @@ import { useCallback, useEffect, useState, useRef } from 'react';
 import File from './files/File';
 import Taskbar from './Taskbar/Taskbar';
 import WindowModal from './windowModal/Windowmodal';
+import StartMenu from './startMenu/StartMenu';
 
 import "./home.css";
 
@@ -31,12 +32,16 @@ const Home = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [files, setFiles] = useState(null);
   const [windowModalMap, setwindowModalMap] = useState([]);
+  const [topCount, setTopCount] = useState(10);
+  const [showStartMenu, setshowStartMenu] = useState(false);
+  const [showContextMenu, setShowContextMenu] = useState(false);
 
   //Refs
   const animation = useRef(null);
   const stringIterator = useRef(0);
   const vscodeIconClick = useRef(0);
   const fullStop = useRef(false);
+  const contextMenuPosition = useRef({ x: 0, y: 0 });
 
   //UseCallback
   const onChange = useCallback((val, viewUpdate) => {
@@ -59,25 +64,18 @@ const Home = () => {
 
   //Function to call when we press enter
   const handleKeyDown = (event) => {
-    if (event.key === EVENTKEY) {
-      handleAnimation();
-    }
+    // if (event.key === EVENTKEY) {
+    //   handleAnimation();
+    // }
   };
 
-  //bootup useEffect
   useEffect(() => {
     setFiles(FileList);
     // document.addEventListener('keydown', handleKeyDown, true);
     // return () => {
     //   document.removeEventListener('keydown', handleKeyDown);
     // };
-
-
   }, []);
-
-  useEffect(() => {
-    console.log("windowModalMap is: ", windowModalMap);
-  }, [windowModalMap]);
 
   const handleStringWrite = (stringVal, addStartString) => {
     let i = -1;
@@ -91,6 +89,15 @@ const Home = () => {
       }
       setValue(value => value + stringVal[i]);
     }, 10);
+  };
+
+  const getContextMenu = () => {
+    console.log(showContextMenu);
+    return <div className="contextMenu"
+      style={{ display: showContextMenu ? "block" : "none", top: `${contextMenuPosition.current.y}px`, left: `${contextMenuPosition.current.x}px` }}
+    >
+      context Menu
+    </div>;
   };
 
   const handleAnimation = () => {
@@ -124,7 +131,7 @@ const Home = () => {
     if (event.detail === 1) {
       handleFileSelection(file.fileName);
     } else if (event.detail === 2) {
-      const zValue = windowModalMap.length + 1;
+      const zValue = topCount + 1;
       if (!fileNameInWindowList(file.fileName)) {
         setwindowModalMap(windowModalMap => [
           ...windowModalMap, {
@@ -132,40 +139,90 @@ const Home = () => {
             windowModalOpen: true,
             top: zValue,
             content: file.content,
-            type: file.type
+            type: file.type,
+            logo: file.source
           }
         ]);
         handleWindowsSelection(file.fileName);
+        setTopCount(topCount => topCount + 1);
       } else {
-        setwindowModalMap(windowModalMap => windowModalMap.map(ell => ({ windowModalOpen: ell.name === file.fileName ? true : ell.windowModalMap })));
-        // handleWindowSelection(fileName);
+        console.log("map before state :", windowModalMap);
+        setwindowModalMap(windowModalMap => windowModalMap.map(ell => ell.name === file.fileName ? ({ ...ell, top: zValue, windowModalOpen: true }) : ell));
       }
     };
+    closeStartMenuIfOpen();
     event.stopPropagation();
   };
 
-  const handleWindowsSelection = (filename) => {
-    setwindowModalMap(windowModalMap => windowModalMap.sort((a, b) => a.top - b.top).map((ell, index) => ({ ...ell, top: ell.name === filename ? 1000 : index })));
+  const handleWindowsSelection = (filename, elementTop) => {
+    if (elementTop === topCount) {
+      return;
+    }
+    const zIndex = topCount;
+    setwindowModalMap(windowModalMap => windowModalMap.map(ell => ({ ...ell, top: ell.name === filename ? zIndex + 1 : ell.top })));
+    setTopCount(topCount => topCount + 1);
+    closeStartMenuIfOpen();
   };
 
-  const handleWindowClick = () => {
+  const handleTaskBarIconClick = (fileName) => {
+    let top = 0;
+    setwindowModalMap(windowModalMap => windowModalMap.map(ell2 => {
+      if (ell2.name === fileName) {
+        top = ell2.top;
+        return { ...ell2, windowModalOpen: true };
+      }
+      return ell2;
+    }));
+    handleWindowsSelection(fileName, top);
+    closeStartMenuIfOpen();
+  };
+
+  const handleWindowMinimize = (fileName, event) => {
+    event.stopPropagation();
+    setwindowModalMap(windowModalMap => windowModalMap.map(ell2 => ell2.name === fileName ? { ...ell2, windowModalOpen: false } : ell2));
+    closeStartMenuIfOpen();
+  };
+
+  const handleWindowClick = (event) => {
+    // console.log("event: ", event);
+    // event.preventDefault();
     // if (!windowModalOpen) {
     //   handleFileSelection(null);
     // }
     // setWindowModalOpen(false);
+    closeStartMenuIfOpen();
+  };
+
+  const handleContextMenuClick = (event) => {
+    // event.preventDefault();
+    // contextMenuPosition.current.x = event.clientX;
+    // contextMenuPosition.current.y = event.clientY;
+    // setShowContextMenu(true);
+  };
+
+  const closeStartMenuIfOpen = () => {
+    if (showStartMenu) {
+      setshowStartMenu(false);
+    }
   };
 
   return <div className='homeScreen'>
-    <div className="homeScreenMainContent" onClick={handleWindowClick}>
-      {windowModalMap && windowModalMap.map((ell, index) => {
+    <div className="homeScreenMainContent"
+      onClick={(e) => handleWindowClick(e)}
+      onContextMenu={(e) => handleContextMenuClick(e)}
+    >
+      {showContextMenu && getContextMenu()}
+      {windowModalMap && windowModalMap.map((ell) => {
         return <WindowModal
           fileName={ell.name}
           show={ell.windowModalOpen}
           zvalue={ell.top}
           content={ell.content}
           windowType={ell.type}
-          handleWindowSelection={() => handleWindowsSelection(ell.name)}
-          handleClose={() => setwindowModalMap(windowModalMap => windowModalMap.map(ell2 => ell2.name === ell.name ? ({ ...ell2, windowModalOpen: false }) : ell2))}
+          closeStartMenuIfOpen={() => closeStartMenuIfOpen()}
+          handleMinimize={(event) => handleWindowMinimize(ell.name, event)}
+          handleWindowSelection={() => handleWindowsSelection(ell.name, ell.top)}
+          handleClose={() => setwindowModalMap(windowModalMap => windowModalMap.filter(ell2 => ell2.name !== ell.name))}
         />;
       })}
       {(!startCodeBlock && files) &&
@@ -187,8 +244,15 @@ const Home = () => {
         onChange={onChange}
       />}
     </div>
-    <Taskbar />
-  </div>;
+    <StartMenu
+      show={showStartMenu}
+    />
+    <Taskbar
+      openWindows={windowModalMap}
+      onWindowClick={(windowName) => handleTaskBarIconClick(windowName)}
+      onStartClick={() => setshowStartMenu(showStartMenu => !showStartMenu)}
+    />
+  </div >;
 };
 
 export default Home;

@@ -1,0 +1,21 @@
+.startMenuScreen {
+  position: absolute; /* Stay in place */
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1000000;
+  pointer-events: none;
+}
+
+.startMenuWindow {
+  position: absolute;
+  background-color: white;
+  left: 0;
+  bottom: 2.5vh;
+  height: 40%;
+  width: 20%;
+  border: 0.2em solid #0011ff;
+  box-sizing: border-box;
+  pointer-events: auto;
+}
