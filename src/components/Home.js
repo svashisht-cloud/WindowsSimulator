@@ -77,6 +77,8 @@ const Home = () => {
     // };
   }, []);
 
+  useEffect(() => { console.log(" windowModalMap:", windowModalMap); }, [windowModalMap]);
+
   const handleStringWrite = (stringVal, addStartString) => {
     let i = -1;
     animation.current = setInterval(() => {
@@ -206,6 +208,21 @@ const Home = () => {
     }
   };
 
+  const openNewWindow = (content) => {
+    const zValue = topCount + 1;
+    setwindowModalMap(windowModalMap => [
+      ...windowModalMap, {
+        name: content.fileName,
+        windowModalOpen: true,
+        top: zValue,
+        type: content.type.fileType,
+        component: content.type.component,
+        logo: content.type.logo
+      }
+    ]);
+    setTopCount(topCount => topCount + 1);
+  };
+
   return <div className='homeScreen'>
     <div className="homeScreenMainContent"
       onClick={(e) => handleWindowClick(e)}
@@ -219,6 +236,8 @@ const Home = () => {
           zvalue={ell.top}
           content={ell.content}
           windowType={ell.type}
+          component={ell.component}
+          openNewWindowForContent={(content) => openNewWindow(content)}
           closeStartMenuIfOpen={() => closeStartMenuIfOpen()}
           handleMinimize={(event) => handleWindowMinimize(ell.name, event)}
           handleWindowSelection={() => handleWindowsSelection(ell.name, ell.top)}

@@ -1,18 +1,32 @@
+import MusicPlayer from "../musicplayer/MusicPlayer";
+export const fileFormatTypes = {
+    APP: "app",
+    FOLDER: "folder"
+};
+
+const componentListStrings = {
+    MUSICPLAYER: "musicPlayer"
+};
+
 const fileTypes = {
     "Music": {
         logo: "mp3.png",
         component: <div>Hello</div>,
-        fileType: "app",
+        fileType: fileFormatTypes.APP,
+        contentType: "music",
+        component: componentListStrings.MUSICPLAYER
     },
     "Picture": {
         logo: "image.png",
         component: <div>Yo</div>,
-        fileType: "app"
+        fileType: fileFormatTypes.APP,
+        contentType: "picture"
     },
     "PDF": {
         logo: "",
         component: <div>Yo</div>,
-        fileType: "app"
+        fileType: fileFormatTypes.APP,
+        contentType: "pdf"
     }
 };
 
@@ -22,7 +36,7 @@ export const FileList = [
         source: "vscode.png",
         fileName: "vscode",
         onclick: () => { console.log("Wtf mate"); },
-        type: "app",
+        type: fileFormatTypes.APP,
         selected: false,
 
     },
@@ -31,7 +45,7 @@ export const FileList = [
         fileName: "Experience",
         onclick: () => { console.log("Wtf mate"); },
         selected: false,
-        type: "folder",
+        type: fileFormatTypes.FOLDER,
         content: []
     },
     {
@@ -39,7 +53,7 @@ export const FileList = [
         fileName: "Projects",
         onclick: () => { console.log("Wtf mate"); },
         selected: false,
-        type: "folder",
+        type: fileFormatTypes.FOLDER,
         content: []
     },
     {
@@ -47,7 +61,7 @@ export const FileList = [
         fileName: "Resume",
         onclick: () => { console.log("Wtf mate"); },
         selected: false,
-        type: "folder",
+        type: fileFormatTypes.FOLDER,
         content: []
     },
     {
@@ -55,7 +69,7 @@ export const FileList = [
         fileName: "Pictures",
         onclick: () => { console.log("Wtf mate"); },
         selected: false,
-        type: "folder",
+        type: fileFormatTypes.FOLDER,
         content: [{
             type: fileTypes.Picture,
             fileName: "yo.png"
@@ -70,10 +84,11 @@ export const FileList = [
         fileName: "fav songs",
         onclick: () => { console.log("Wtf mate"); },
         selected: false,
-        type: "folder",
+        type: fileFormatTypes.FOLDER,
         content: [{
             type: fileTypes.Music,
-            fileName: "I_wanna_love_you.mp3"
+            fileName: "I_wanna_love_you.mp3",
+            source: ""
         },
         {
             type: fileTypes.Music,

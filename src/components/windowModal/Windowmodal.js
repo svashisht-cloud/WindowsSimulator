@@ -4,11 +4,16 @@ import { RxCross1 } from "react-icons/rx";
 import { FaRegWindowMaximize } from "react-icons/fa";
 import { FaWindowMinimize } from "react-icons/fa";
 import { FaWindowRestore } from "react-icons/fa";
+
 import File from "../files/File";
+import MusicPlayer from '../musicplayer/MusicPlayer';
+
+import { fileFormatTypes } from '../files/FileList';
 
 
 const WindowModal = (props) => {
     const [isFullScreen, setIsFullScreen] = useState(false);
+    const [selectedFile, setSelectedFile] = useState(null);
     const [height, setHeight] = useState("50%");
     const [width, setWidth] = useState("60%");
     const windowRef = useRef(null);
@@ -76,6 +81,49 @@ const WindowModal = (props) => {
         setIsFullScreen(isFullScreen => !isFullScreen);
     };
 
+    const handleFileSelection = (fileName) => {
+        if (fileName === null) setSelectedFile(null);
+        else setSelectedFile(selectedFile => selectedFile === fileName ? null : fileName);
+    };
+
+    const handleFileClick = (ell, event) => {
+        if (event.detail === 1) {
+            handleFileSelection(ell.fileName);
+        } else if (event.detail === 2) {
+            if (ell.type.fileType === fileFormatTypes.APP) {
+                props.openNewWindowForContent(ell);
+            }
+        };
+        event.stopPropagation();
+    };
+
+    const getAppDisplay = () => {
+        console.log("props:", props);
+        if (props.component === "musicPlayer") {
+            return <MusicPlayer />;
+        }
+    };
+
+    const getModalContent = () => {
+        if (props.windowType) {
+            if (props.windowType === fileFormatTypes.APP) {
+                return getAppDisplay();
+            }
+            if (props.windowType === fileFormatTypes.FOLDER) {
+                return props.content && props.content.map((ell, index) => <File
+                    imageSource={ell.type.logo}
+                    onClick={(e) => handleFileClick(ell, e)}
+                    fileName={ell.fileName}
+                    selected={ell.fileName === selectedFile}
+                    fileCount={index}
+                />);
+            }
+        } else {
+            return <div> There was an error</div>;
+        }
+
+    };
+
     return <div className="modal" id="modal"
         style={{
             display: props.show ? "block" : "none",
@@ -105,13 +153,7 @@ const WindowModal = (props) => {
                 </div>
             </div>
             <div className='modalContent'>
-                {props.content && props.content.map((ell, index) => <File
-                    imageSource={ell.type.logo}
-                    onClick={(e) => console.log(e)}
-                    fileName={ell.fileName}
-                    // selected={ell.fileName === selectedFile}
-                    fileCount={index}
-                />)}
+                {getModalContent()}
             </div>
         </div>
     </div>;
