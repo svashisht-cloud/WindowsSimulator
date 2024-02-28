@@ -217,7 +217,8 @@ const Home = () => {
         top: zValue,
         type: content.type.fileType,
         component: content.type.component,
-        logo: content.type.logo
+        logo: content.type.logo,
+        source: content.source
       }
     ]);
     setTopCount(topCount => topCount + 1);
@@ -237,6 +238,7 @@ const Home = () => {
           content={ell.content}
           windowType={ell.type}
           component={ell.component}
+          source={ell.source}
           openNewWindowForContent={(content) => openNewWindow(content)}
           closeStartMenuIfOpen={() => closeStartMenuIfOpen()}
           handleMinimize={(event) => handleWindowMinimize(ell.name, event)}

@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './windowmodal.css';
 import { RxCross1 } from "react-icons/rx";
-import { FaRegWindowMaximize } from "react-icons/fa";
-import { FaWindowMinimize } from "react-icons/fa";
-import { FaWindowRestore } from "react-icons/fa";
+import { FaRegWindowMaximize, FaWindowMinimize, FaWindowRestore } from "react-icons/fa";
 
 import File from "../files/File";
 import MusicPlayer from '../musicplayer/MusicPlayer';
@@ -100,7 +98,10 @@ const WindowModal = (props) => {
     const getAppDisplay = () => {
         console.log("props:", props);
         if (props.component === "musicPlayer") {
-            return <MusicPlayer />;
+            return <MusicPlayer
+                name={props.fileName}
+                source={props.source}
+            />;
         }
     };
 

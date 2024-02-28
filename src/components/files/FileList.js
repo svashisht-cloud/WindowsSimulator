@@ -85,14 +85,11 @@ export const FileList = [
         onclick: () => { console.log("Wtf mate"); },
         selected: false,
         type: fileFormatTypes.FOLDER,
-        content: [{
-            type: fileTypes.Music,
-            fileName: "I_wanna_love_you.mp3",
-            source: ""
-        },
-        {
-            type: fileTypes.Music,
-            fileName: "Aajkalzindagi"
-        }]
+        content: [
+            {
+                type: fileTypes.Music,
+                fileName: "HotlineBling",
+                source: "hotlinebling.mp3"
+            }]
     }
 ];
