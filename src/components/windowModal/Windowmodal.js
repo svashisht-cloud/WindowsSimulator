@@ -3,34 +3,55 @@ import './windowmodal.css';
 import { RxCross1 } from "react-icons/rx";
 import { FaRegWindowMaximize, FaWindowMinimize, FaWindowRestore } from "react-icons/fa";
 
-import File from "../files/File";
+import { SlArrowLeftCircle, SlArrowRightCircle } from "react-icons/sl";
+
+import FolderViewer from '../folderViewer/FolderViewer';
 import MusicPlayer from '../musicplayer/MusicPlayer';
+import PhotoViewer from '../photoviewer/photoviewer';
+import PdfViewer from '../pdfviewer/PdfViewer';
+import VsCodeWindow from '../vscodeWindow/VsCodeWindow';
+import VideoViewer from '../videoViewer/VideoViewer';
 
 import { fileFormatTypes } from '../files/FileList';
+import { componentListStrings } from '../files/FileList';
 
 
 const WindowModal = (props) => {
     const [isFullScreen, setIsFullScreen] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedDirectory, setSelectedDirectory] = useState(props.file);
+    const [isBackButtonDisabled, setIsBackButtonDisabled] = useState(true);
+    const [isForwardButtonDisabled, setIsForwardButtonDisabled] = useState(true);
+    // const [currentDirectory, setCurrentDirectory] = useState([props.file.content]);
+
     const [height, setHeight] = useState("50%");
     const [width, setWidth] = useState("60%");
+
+    const directoryList = useRef([props.file]);
+    const currentDirectoryIndex = useRef(0);
+
     const windowRef = useRef(null);
     const handleWindowModalClick = (event) => {
         props.handleWindowSelection(event);
         event.stopPropagation();
     };
     useEffect(() => {
-    }, []);
+        console.log("rerendering");
+    });
 
     useEffect(() => {
     }, [isFullScreen]);
+
+    useEffect(() => {
+        setIsBackButtonDisabled(currentDirectoryIndex.current === 0);
+        setIsForwardButtonDisabled(currentDirectoryIndex.current === directoryList.current.length - 1);
+    }, [selectedDirectory]);
 
     const handleTopBarMouseDown = (e) => {
         if (isFullScreen) {
             setHeight("80%");
             setWidth("80%");
             setIsFullScreen(false);
-            console.log("then code is come here");
         }
         props.handleWindowSelection(e);
         e.preventDefault();
@@ -84,45 +105,106 @@ const WindowModal = (props) => {
         else setSelectedFile(selectedFile => selectedFile === fileName ? null : fileName);
     };
 
-    const handleFileClick = (ell, event) => {
-        if (event.detail === 1) {
-            handleFileSelection(ell.fileName);
-        } else if (event.detail === 2) {
-            if (ell.type.fileType === fileFormatTypes.APP) {
-                props.openNewWindowForContent(ell);
-            }
-        };
+    const handleOpenFile = (event, ell) => {
         event.stopPropagation();
+
+        // first whenever a new file is opened, deleted all element from current index till last index
+        if (directoryList.current.length > 1) {
+            directoryList.current = directoryList.current.splice(currentDirectoryIndex.current + 1, directoryList.current.length - (currentDirectoryIndex.current + 1));
+        }
+
+        currentDirectoryIndex.current += 1;
+        directoryList.current.push(ell);
+        setSelectedDirectory(ell);
+    };
+
+    const handleSidebarSelection = (directory) => {
+        setSelectedDirectory(directory);
+
     };
 
     const getAppDisplay = () => {
-        console.log("props:", props);
-        if (props.component === "musicPlayer") {
+        const { component, fileName, source } = selectedDirectory;
+        if (component === componentListStrings.MUSICPLAYER) {
             return <MusicPlayer
-                name={props.fileName}
-                source={props.source}
+                name={fileName}
+                source={source}
+            />;
+        } else if (component === componentListStrings.PHOTOVIEWER) {
+            return <PhotoViewer
+                name={fileName}
+                source={source}
+            />;
+        } else if (component === componentListStrings.PDFVIEWER) {
+            return <PdfViewer
+                name={fileName}
+                source={source}
+            />;
+        } else if (component === componentListStrings.VSCODE) {
+            return <VsCodeWindow
+                name={fileName}
+                source={source}
+            />;
+        } else if (component === componentListStrings.VIDEOVIEWER) {
+            return <VideoViewer
+                name={fileName}
+                source={source}
             />;
         }
     };
 
+    const handleBackAndForward = (isBack) => {
+        if (isBack) {
+            if (currentDirectoryIndex.current === 0) return;
+            currentDirectoryIndex.current -= 1;
+        } else {
+            if (currentDirectoryIndex.current === directoryList.current.length - 1) return;
+            currentDirectoryIndex.current += 1;
+        }
+        setSelectedDirectory(directoryList.current[currentDirectoryIndex.current]);
+    };
+
     const getModalContent = () => {
-        if (props.windowType) {
-            if (props.windowType === fileFormatTypes.APP) {
+        if (selectedDirectory.type) {
+            if (selectedDirectory.type === fileFormatTypes.APP) {
                 return getAppDisplay();
             }
-            if (props.windowType === fileFormatTypes.FOLDER) {
-                return props.content && props.content.map((ell, index) => <File
-                    imageSource={ell.type.logo}
-                    onClick={(e) => handleFileClick(ell, e)}
-                    fileName={ell.fileName}
-                    selected={ell.fileName === selectedFile}
-                    fileCount={index}
-                />);
+            if (selectedDirectory.type === fileFormatTypes.FOLDER) {
+                return <div className='folderViewerMain'>
+                    <div className='folderViewerTopBar'>
+                        <div className='backAndForwardTools'>
+                            <div className="folderViewerTools">
+                                <button className={`backAndForwardButton ${!isBackButtonDisabled ? "notDisabledButton" : ""} `} disabled={isBackButtonDisabled} onClick={() => handleBackAndForward(true)}>
+                                    <SlArrowLeftCircle />
+                                </button>
+                            </div>
+                            <div className="folderViewerTools">
+                                <button className={`backAndForwardButton ${!isForwardButtonDisabled ? "notDisabledButton" : ""} `} disabled={isForwardButtonDisabled} onClick={() => handleBackAndForward(false)}>
+                                    <SlArrowRightCircle />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <FolderViewer
+                        directory={selectedDirectory}
+                        handleOpenFile={handleOpenFile}
+                        openNewWindowForContent={props.openNewWindowForContent}
+                        handleSidebarSelection={handleSidebarSelection}
+                        parentWidth={width}
+                    />
+                </div>;
             }
         } else {
             return <div> There was an error</div>;
         }
+    };
 
+    const getSelectedDirectoryWorkingPath = () => {
+        let workingPath = "~";
+        for (let i = 0; i <= currentDirectoryIndex.current; ++i) {
+            workingPath += `/${directoryList.current[i].fileName}`;
+        }
+        return workingPath;
     };
 
     return <div className="modal" id="modal"
@@ -139,7 +221,9 @@ const WindowModal = (props) => {
         <div className='modalWindow'>
             <div className='modalTopbar' id="modalTopbar">
                 <div className='modalTopbarFilename' onMouseDown={(e) => handleTopBarMouseDown(e)}>
-                    {props.fileName}
+                    <img className='modalTopBarIcon' src={selectedDirectory.logo} alt="Cinque Terre" unselectable='on' ></img>
+                    {/* <div className='modalTopbarFilenameText'> {selectedDirectory.fileName}</div> */}
+                    <div className='modalTopbarFilenameText'> {getSelectedDirectoryWorkingPath()}</div>
                 </div>
                 <div className="topbarTools" onClick={(e) => console.log("event the tools are being clicked")}>
                     <div className="modalTopbarMinimiseButton topbarToolsButton" onClick={(e) => props.handleMinimize(e)}>

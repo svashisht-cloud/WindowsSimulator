@@ -8,12 +8,14 @@
 }
 
 .musicPlayerBAckground {
-  flex: 5;
-  background-color: rgba(0, 0, 0, 0.612);
+  flex: 1;
+  background-color: rgb(0, 0, 0);
+  position: relative;
+  box-sizing: border-box;
 }
 
 .musicToolbar {
-  flex: 1;
+  height: 5vh;
   display: flex;
   width: 100%;
   background-color: white;
@@ -36,5 +38,7 @@
 
 .musicPlayerSeekProgress {
   height: 100%;
-  background-color: rgba(173, 216, 230, 0.289);
+  position: absolute;
+  z-index: 10000;
+  background-color: rgba(243, 252, 255, 0.39);
 }

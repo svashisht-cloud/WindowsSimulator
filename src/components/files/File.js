@@ -5,13 +5,15 @@ const File = (props) => {
     const [topDisplacement, setTopDisplacement] = useState("5vh");
 
     useEffect(() => {
+        const fileCountPerRow = props.parentWidth ? Math.floor(props.parentWidth / 10) : 10;
         const iconCount = props.fileCount;
-        const topCount = Math.floor(iconCount / 9);
-        const widthCount = iconCount % 9;
+        const topCount = Math.floor(iconCount / fileCountPerRow);
+        const widthCount = iconCount % fileCountPerRow;
 
         setTopDisplacement(`${10 * topCount}vh`);
         setLeftDisplacement(`${10 * widthCount}vw`);
-    }, []);
+    }, [props.parentWidth]);
+
     const { imageSource, fileName, onClick, selected } = props;
 
     return <div className={`${selected ? "selectedWindowFile" : ""}  windowsFile`} onClick={onClick} style={{ left: leftDisplacement ? leftDisplacement : "5vw", top: topDisplacement ? topDisplacement : "5vh" }}>

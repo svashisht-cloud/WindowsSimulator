@@ -41,7 +41,6 @@
 }
 
 .modalTopbarFilename {
-  font-size: 150%;
   font-family: monospace;
   /* position: absolute; */
   bottom: 0;
@@ -49,9 +48,18 @@
   flex: 1;
   box-sizing: border-box;
   align-items: center;
-  color: #ffffff;
+  display: flex;
 }
 
+.modalTopBarIcon {
+  height: 1.5vh;
+}
+
+.modalTopbarFilenameText {
+  color: #ffffff;
+  font-size: 1.2vh;
+  margin-left: 0.2vw;
+}
 .topbarTools {
   /* position:absolute; */
   right: 0;
@@ -92,4 +100,60 @@
 
 .modalTopbarMaximiseButton {
   font-size: 170%;
+}
+
+.backAndForwardTools {
+  height: 100%;
+  width: 4vw;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.folderViewerTools {
+  height: 100%;
+  flex: 1;
+  font-size: 2vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: black; */
+  box-sizing: border-box;
+}
+
+.backAndForwardButton {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  font-size: 100%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.notDisabledButton {
+  background-color: rgb(255, 255, 255);
+}
+.notDisabledButton:hover {
+  background-color: rgb(208, 208, 208);
+}
+
+.folderViewerTools:hover {
+  color: white;
+
+  /* border: 1px solid grey; */
+}
+
+.folderViewerMain {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.folderViewerTopBar {
+  height: 3vh;
+  background-color: rgb(255, 255, 255);
+  box-sizing: border-box;
 }

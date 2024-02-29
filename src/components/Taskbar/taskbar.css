@@ -22,22 +22,29 @@
   /* text-align: center; */
   overflow: hidden;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: white;
-  font-size: 200%;
-  font-style: italic;
-  font-weight: bold;
   border: 2px solid rgba(12, 81, 6, 0.85);
   box-sizing: border-box;
 }
-
+.windowStartButtonText {
+  display: flex;
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 2.2vh;
+  align-items: center;
+  justify-content: center;
+  flex: 2;
+}
 .startButtonContent {
   margin-top: 0.1em;
   margin-left: 0.4em;
+  display: flex;
   /* transform: translate(0, 20%); */
 }
 
 .windowsLogoTaskbar {
-  height: 1em;
+  /* flex: 1; */
+  height: 2.5vh;
   margin: auto;
 }
 
@@ -95,7 +102,7 @@
 .utilitiesTime {
   flex: 1;
   display: flex;
-  font-size: 100%;
+  font-size: 1vh;
   justify-content: center;
   align-items: center;
   text-align: center;

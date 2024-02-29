@@ -8,9 +8,6 @@ import { IoPlayBack, IoPlayForwardSharp } from "react-icons/io5";
 import { TbRepeatOff } from "react-icons/tb";
 import { VscUnmute } from "react-icons/vsc";
 
-
-
-
 const MusicPlayer = (props) => {
     const sound = useRef(new Howl({
         src: [props.source]
@@ -20,11 +17,12 @@ const MusicPlayer = (props) => {
     const [looped, setLooped] = useState(false);
     const [seekPercentage, setSeekPercentage] = useState(0);
     const seekRef = useRef(null);
+    const playProgress = useRef(null);
 
     const startSeeking = () => {
         return setInterval(() => {
-            setSeekPercentage(seekPercentage => Math.round((sound.current.seek() / sound.current.duration()) * 100));
-        }, 1000);
+            setSeekPercentage(seekPercentage => (sound.current.seek() / sound.current.duration()) * 100);
+        }, 300);
     };
 
     useEffect(() => {
@@ -85,8 +83,17 @@ const MusicPlayer = (props) => {
         setLooped(looped => !looped);
     };
 
+    const handlePlayerClick = (event) => {
+        const clientX = event.clientX;
+        const startX = playProgress.current.getBoundingClientRect().x;
+        const width = playProgress.current.getBoundingClientRect().width;
+        const percentage = Math.floor(((clientX - startX) / (width)) * 100);
+        setSeekPercentage(seekPercentage => percentage);
+        sound.current.seek(Math.floor(sound.current.duration() * (percentage / 100)));
+    };
+
     return <div className='musicPlayer'>
-        <div className="musicPlayerBAckground">
+        <div className="musicPlayerBAckground" ref={playProgress} onClick={(e) => handlePlayerClick(e)}>
             <div className="musicPlayerSeekProgress" style={{ width: `${seekPercentage}%` }}></div>
         </div>
         <div className="musicToolbar">

@@ -14,14 +14,14 @@ const Taskbar = (props) => {
         <div className='taskbarElement windowsStart'>
             <div className='startButtonContent' onClick={props.onStartClick}>
                 <img className='windowsLogoTaskbar' src="windowsLogo.png" alt="Cinque Terre" unselectable='on' ></img>
-                start
+                <div className='windowStartButtonText'>start</div>
             </div>
         </div>
 
         <div className='taskbarElement windowsManager'>
             {props.openWindows && props.openWindows.map(ell =>
-                <div className='windowsManagerElement' onClick={() => props.onWindowClick(ell.name)}>
-                    <img className='taskbarWindowsLogo' src={ell.logo} alt="Cinque Terre" unselectable='on' ></img>
+                <div className='windowsManagerElement' onClick={() => props.onWindowClick(ell.id)}>
+                    <img className='taskbarWindowsLogo' src={ell.file.logo} alt="Cinque Terre" unselectable='on' ></img>
                 </div>)}
         </div>
 

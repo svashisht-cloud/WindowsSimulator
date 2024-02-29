@@ -1,0 +1,49 @@
+.folderViewerFilesAndContent {
+  flex: 1;
+
+  box-sizing: border-box;
+  display: flex;
+}
+
+.folderViewerSideBar {
+  width: 6vw;
+  background-color: rgb(221, 221, 221);
+}
+
+.folderViewerFilesAndContentMain {
+  flex: 1;
+  position: relative;
+  overflow: auto;
+}
+
+.folderViewerSideBarDirectoryElement {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 3vh;
+}
+
+.folderViewerSideBarDirectoryElement:hover {
+  background-color: rgb(179, 179, 179);
+}
+
+.folderViewerSideBarDirectoryLogo {
+  height: 100%;
+  overflow: hidden;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.3vw;
+}
+.folderViewerSideBarDirectoryLogoImage {
+  height: 60%;
+}
+
+.folderViewerSideBarDirectoryName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.3vw;
+  font-size: 150%;
+}
