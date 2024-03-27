@@ -35,7 +35,7 @@ const FolderViewer = (props) => {
     };
 
     const getFolderSideBar = () => {
-        return FileList.map(ell => <div className='folderViewerSideBarDirectoryElement' onClick={() => props.handleSidebarSelection(ell)}>
+        return FileList.map(ell => <div className='folderViewerSideBarDirectoryElement' onClick={(event) => props.handleSidebarSelection(event, ell)}>
             <div className='folderViewerSideBarDirectoryLogo'>
                 <img className='folderViewerSideBarDirectoryLogoImage' src={ell.logo} alt="Cinque Terre" unselectable='on' ></img>
             </div>

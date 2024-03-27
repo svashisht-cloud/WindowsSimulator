@@ -9,7 +9,8 @@ export const componentListStrings = {
     PDFVIEWER: "pdfViewer",
     VSCODE: "vscode",
     FOLDERVIEWER: "folderViewer",
-    VIDEOVIEWER: "videoViewer"
+    VIDEOVIEWER: "videoViewer",
+    TEXTEDITOR: "textEditor"
 };
 
 
@@ -136,7 +137,15 @@ const Documents = {
     logo: "folder.png",
     fileName: "Documents",
     type: fileFormatTypes.FOLDER,
-    content: []
+    content: [
+        {
+            logo: "notepad.webp",
+            component: componentListStrings.TEXTEDITOR,
+            type: fileFormatTypes.APP,
+            fileName: "yo.txt",
+            source: "Hey hello"
+        }
+    ]
 };
 
 export const FileList = [

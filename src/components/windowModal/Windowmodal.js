@@ -9,6 +9,7 @@ import FolderViewer from '../folderViewer/FolderViewer';
 import MusicPlayer from '../musicplayer/MusicPlayer';
 import PhotoViewer from '../photoviewer/photoviewer';
 import PdfViewer from '../pdfviewer/PdfViewer';
+import TextEditor from '../textEditor/TextEditor';
 import VsCodeWindow from '../vscodeWindow/VsCodeWindow';
 import VideoViewer from '../videoViewer/VideoViewer';
 
@@ -28,6 +29,7 @@ const WindowModal = (props) => {
     const [width, setWidth] = useState("60%");
 
     const directoryList = useRef([props.file]);
+    const workingPathList = useRef([props.file.fileName]);
     const currentDirectoryIndex = useRef(0);
 
     const windowRef = useRef(null);
@@ -35,9 +37,6 @@ const WindowModal = (props) => {
         props.handleWindowSelection(event);
         event.stopPropagation();
     };
-    useEffect(() => {
-        console.log("rerendering");
-    });
 
     useEffect(() => {
     }, [isFullScreen]);
@@ -45,6 +44,8 @@ const WindowModal = (props) => {
     useEffect(() => {
         setIsBackButtonDisabled(currentDirectoryIndex.current === 0);
         setIsForwardButtonDisabled(currentDirectoryIndex.current === directoryList.current.length - 1);
+        console.log("directoryList: ", directoryList);
+        console.log("workingPathList: ", workingPathList);
     }, [selectedDirectory]);
 
     const handleTopBarMouseDown = (e) => {
@@ -100,27 +101,35 @@ const WindowModal = (props) => {
         setIsFullScreen(isFullScreen => !isFullScreen);
     };
 
-    const handleFileSelection = (fileName) => {
-        if (fileName === null) setSelectedFile(null);
-        else setSelectedFile(selectedFile => selectedFile === fileName ? null : fileName);
-    };
-
-    const handleOpenFile = (event, ell) => {
+    const handleOpenFile = (event, ell, isSideBarDirectory = false) => {
         event.stopPropagation();
 
         // first whenever a new file is opened, deleted all element from current index till last index
         if (directoryList.current.length > 1) {
-            directoryList.current = directoryList.current.splice(currentDirectoryIndex.current + 1, directoryList.current.length - (currentDirectoryIndex.current + 1));
+            directoryList.current.splice(currentDirectoryIndex.current + 1, directoryList.current.length - (currentDirectoryIndex.current + 1));
+            workingPathList.current.splice(currentDirectoryIndex.current + 1, workingPathList.current.length - (currentDirectoryIndex.current + 1));
         }
 
+        if (isSideBarDirectory) {
+            workingPathList.current.push(ell.fileName);
+        } else {
+            workingPathList.current.push(workingPathList.current[currentDirectoryIndex.current] + "/" + ell.fileName);
+        }
         currentDirectoryIndex.current += 1;
         directoryList.current.push(ell);
         setSelectedDirectory(ell);
     };
 
-    const handleSidebarSelection = (directory) => {
-        setSelectedDirectory(directory);
+    const handleSidebarSelection = (event, directory) => {
+        handleOpenFile(event, directory, true);
+        // if (directoryList.current.length > 1) {
+        //     directoryList.current.splice(currentDirectoryIndex.current + 1, directoryList.current.length - (currentDirectoryIndex.current + 1));
+        //     workingPathList.current.splice(currentDirectoryIndex.current + 1, workingPathList.current.length - (currentDirectoryIndex.current + 1));
+        // }
 
+        // currentDirectoryIndex.current += 1;
+        // directoryList.current.push(directory);
+        // setSelectedDirectory(directory);
     };
 
     const getAppDisplay = () => {
@@ -147,6 +156,11 @@ const WindowModal = (props) => {
             />;
         } else if (component === componentListStrings.VIDEOVIEWER) {
             return <VideoViewer
+                name={fileName}
+                source={source}
+            />;
+        } else if (component === componentListStrings.TEXTEDITOR) {
+            return <TextEditor
                 name={fileName}
                 source={source}
             />;
@@ -200,10 +214,7 @@ const WindowModal = (props) => {
     };
 
     const getSelectedDirectoryWorkingPath = () => {
-        let workingPath = "~";
-        for (let i = 0; i <= currentDirectoryIndex.current; ++i) {
-            workingPath += `/${directoryList.current[i].fileName}`;
-        }
+        let workingPath = "~/" + workingPathList.current[currentDirectoryIndex.current];
         return workingPath;
     };
 
@@ -225,7 +236,7 @@ const WindowModal = (props) => {
                     {/* <div className='modalTopbarFilenameText'> {selectedDirectory.fileName}</div> */}
                     <div className='modalTopbarFilenameText'> {getSelectedDirectoryWorkingPath()}</div>
                 </div>
-                <div className="topbarTools" onClick={(e) => console.log("event the tools are being clicked")}>
+                <div className="topbarTools">
                     <div className="modalTopbarMinimiseButton topbarToolsButton" onClick={(e) => props.handleMinimize(e)}>
                         <FaWindowMinimize />
                     </div>
