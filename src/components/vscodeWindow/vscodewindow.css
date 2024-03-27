@@ -1,0 +1,15 @@
+.vsCodeWindow {
+  background: black;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  /* display: flex; */
+}
+
+.CodeMirror {
+  border: 1px solid #eee;
+  flex: 1;
+  height: 100%;
+  width: 100%;
+}

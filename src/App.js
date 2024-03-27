@@ -7,20 +7,20 @@ import "./app.css";
 
 function App() {
   return (
-    <div className="app">
-      <div className="sidebar">
-        <SideNavbar />
-      </div>
-      <div className="maincontent">
-        <BrowserRouter>
+    <BrowserRouter>
+      <div className="app">
+        {/* <div className="sidebar">
+          <SideNavbar />
+        </div> */}
+        <div className="maincontent">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/experience" element={<Experience />} />
           </Routes>
-        </BrowserRouter>
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 

@@ -1,0 +1,39 @@
+.homeScreen {
+  background-image: url("../images/wp.png");
+  background-size: cover;
+
+  background-repeat: no-repeat;
+  /* background-color: black; */
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  /* display: flex; */
+  /* flex-direction: column; */
+}
+
+.homeScreenMainContent {
+  height: 97.5%;
+  position: relative;
+  box-sizing: border-box;
+  /* flex: 99; */
+}
+
+.contextMenu {
+  background-color: aliceblue;
+  position: absolute;
+  height: 10%;
+  width: 7%;
+  left: 50vw;
+  top: 50vh;
+  z-index: 500;
+}
+
+.windowsFile {
+  margin: 2vh;
+  display: inline-block;
+  /* border: 1px solid black; */
+  height: 8vh;
+  width: 8vh;
+  overflow: hidden;
+  text-align: center;
+}

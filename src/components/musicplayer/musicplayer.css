@@ -1,0 +1,44 @@
+.musicPlayer {
+  height: 100%;
+  width: 100%;
+  background-color: grey;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.musicPlayerBAckground {
+  flex: 1;
+  background-color: rgb(0, 0, 0);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.musicToolbar {
+  height: 5vh;
+  display: flex;
+  width: 100%;
+  background-color: white;
+}
+
+.musicToolbarElement {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+
+.musicToolbarElement:hover {
+  background-color: black;
+  color: white;
+}
+
+.musicPlayerSeekProgress {
+  height: 100%;
+  position: absolute;
+  z-index: 10000;
+  background-color: rgba(243, 252, 255, 0.39);
+}

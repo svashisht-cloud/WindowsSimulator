@@ -1,0 +1,142 @@
+.startMenuScreen {
+  position: absolute; /* Stay in place */
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1000000;
+  pointer-events: none;
+}
+
+.startMenuWindow {
+  border-radius: 5px;
+  position: absolute;
+  background-color: white;
+  left: 0;
+  bottom: 2.7vh;
+  height: 40%;
+  width: 20%;
+  border: 0.3em solid #0011ff;
+  box-sizing: border-box;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.startMenuTopBar {
+  height: 6vh;
+  background-color: #0011ff;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.startMenuContents {
+  flex: 1;
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  flex-direction: column;
+}
+
+.startMenuContentsElement {
+  height: 3vh;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.startMenuContentsElement:hover {
+  border: 1px solid black;
+}
+
+.userProfile {
+  height: 100%;
+  margin: 0.1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profilePicStartMenu {
+  border-radius: 5px;
+  height: 80%;
+  border: 0.2em solid #ffffff;
+  box-shadow: 5px 5px 10px 3px black;
+}
+
+.userProfileName {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin: 0.5em;
+  color: white;
+  font-size: 1.6vh;
+}
+.startMenuSingingOptions {
+  height: 3vh;
+  background-color: #0011ff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.startMenuSingingOptionsContainer {
+  height: 100%;
+  /* width: 100%; */
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.extraSpaceStartMenuSigningOptions {
+  flex: 1;
+}
+
+.logoffButton {
+  height: 80%;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  /* background-color: #007bff; */
+  box-sizing: border-box;
+}
+
+.logoutKeyLogo {
+  border: 3px solid #ffffff;
+  margin: 0.2vw;
+  border-radius: 5px;
+  font-size: 1.7vh;
+  width: 1.2vw;
+  height: 2vh;
+  /* size: 1; */
+  color: white;
+  background-color: rgb(255, 166, 0);
+  box-sizing: border-box;
+}
+.logoutKeyLogoicon {
+}
+
+.logoffButtonString {
+  color: white;
+  font-size: 1.5vh;
+  margin: 0.2vw;
+}
+
+.logoffButton:hover {
+  background-color: #0099ff;
+}
+
+.startMenuContentsElementImageContainer {
+  height: 80%;
+  overflow: hidden;
+}
+
+.startMenuContentsElementImage {
+  height: 100%;
+  margin-left: 1vw;
+}
+.startMenuContentsElementText {
+  font-size: 1vh;
+  margin: 1vw;
+}

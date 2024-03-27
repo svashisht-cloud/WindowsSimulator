@@ -1,0 +1,112 @@
+.windowsTaskbar {
+  width: 100%;
+  height: 3%;
+  /* position: absolute; */
+  bottom: 0px;
+  /* border-style: outset; */
+  background-color: rgb(5, 82, 169);
+  display: flex;
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 1000001;
+}
+
+.taskbarElement {
+  height: 100%;
+  width: 100%;
+}
+
+.windowsStart {
+  flex: 1;
+  background-color: green;
+  /* text-align: center; */
+  overflow: hidden;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border: 2px solid rgba(12, 81, 6, 0.85);
+  box-sizing: border-box;
+}
+.windowStartButtonText {
+  display: flex;
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 2.2vh;
+  align-items: center;
+  justify-content: center;
+  flex: 2;
+}
+.startButtonContent {
+  margin-top: 0.1em;
+  margin-left: 0.4em;
+  display: flex;
+  /* transform: translate(0, 20%); */
+}
+
+.windowsLogoTaskbar {
+  /* flex: 1; */
+  height: 2.5vh;
+  margin: auto;
+}
+
+.windowsStart:hover {
+  color: black;
+  background-color: lightgreen;
+}
+
+.windowsManager {
+  box-sizing: border-box;
+  flex: 12;
+  background-color: rgb(5, 82, 169);
+  border: 2px solid rgba(10, 44, 138, 0.85);
+  display: flex;
+  align-items: flex-start;
+}
+
+.windowsManagerElement {
+  box-sizing: border-box;
+  width: 3vw;
+  height: 100%;
+  display: flex;
+  font-size: 150%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.576);
+  margin-left: 5px;
+}
+
+.windowsManagerElement:hover {
+  background-color: rgba(255, 255, 255, 0.541);
+  border: 3px solid white;
+}
+
+.taskbarWindowsLogo {
+  height: 2vh;
+}
+
+.windowsUtility {
+  flex: 2;
+  display: flex;
+  background-color: rgb(6, 143, 222);
+  border: 2px solid rgba(18, 69, 209, 0.85);
+  box-sizing: border-box;
+}
+
+.utilitiesUtility {
+  flex: 2;
+  display: flex;
+  /* justify-content: center; */
+}
+
+.utilitiesTime {
+  flex: 1;
+  display: flex;
+  font-size: 1vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  margin-right: 1vw;
+}
