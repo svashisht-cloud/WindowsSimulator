@@ -5,8 +5,8 @@
   top: 10vh;
   left: 15vw;
   overflow: auto; /* Enable scroll if needed */
-  background-color: white;
-  border: 0.2em solid #0011ff;
+  background-color: rgb(59, 59, 59);
+  border: 0.2em solid #ffd000;
   background-color: #0011ff;
   box-shadow: 20px 20px 50px 15px black;
   box-sizing: border-box;

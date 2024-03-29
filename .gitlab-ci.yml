@@ -1,7 +1,19 @@
+stages:
+  - build
+  - deploy
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+
 build project:
+  stage: build
   image: node:20
-  env:
+  variables:
     CI: false
   script:
     - npm install
     - npm run build
+  artifacts:
+    paths:
+      - build/
