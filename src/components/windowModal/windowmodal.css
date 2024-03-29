@@ -6,7 +6,7 @@
   left: 15vw;
   overflow: auto; /* Enable scroll if needed */
   background-color: white;
-  border: 0.5em solid #0011ff;
+  border: 0.2em solid #0011ff;
   background-color: #0011ff;
   box-shadow: 20px 20px 50px 15px black;
   box-sizing: border-box;
@@ -57,7 +57,7 @@
 
 .modalTopbarFilenameText {
   color: #ffffff;
-  font-size: 1.2vh;
+  font-size: 1.5vh;
   margin-left: 0.2vw;
 }
 .topbarTools {
@@ -71,7 +71,7 @@
 /* The Close Button */
 .modalTopbarCloseButton {
   background-color: red;
-  font-size: 250%;
+  font-size: 1.9vh;
 }
 
 .topbarToolsButton {
@@ -95,11 +95,11 @@
 }
 
 .modalTopbarMinimiseButton {
-  font-size: 160%;
+  font-size: 1.5vh;
 }
 
 .modalTopbarMaximiseButton {
-  font-size: 170%;
+  font-size: 1.5vh;
 }
 
 .backAndForwardTools {

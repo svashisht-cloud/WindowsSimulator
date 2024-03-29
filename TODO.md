@@ -19,11 +19,14 @@
 
 Priorities:
 
-1. (!done)Nested Fodlers
+1. +++ Nested Fodlers
    a. Rather than passing each of the files attributes, such pass in the whole file inside the folder. Would be a whole lot easier.
-2. Start Button
+2. +++ Start Button
 3. +++ Video Viewer
 4. Fix file icon text overflow
 5. Add actual projects
 6. Right click menu (should not be that hard)
 7. Host website, add gitlab pipeline
+8. Make text in vh and vw instead of percentages
+9. Complete pipeline and host it
+10. +++ Setup mac for personal project

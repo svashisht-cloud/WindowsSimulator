@@ -1,5 +1,7 @@
 build project:
   image: node:20
+  env:
+    CI: false
   script:
     - npm install
     - npm run build
