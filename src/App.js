@@ -1,23 +1,25 @@
 import Home from "./components/Home";
+import { FileList } from "./components/files/FileList";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Projects from "./components/Projects";
-import Experience from "./components/Experience";
-import SideNavbar from "./components/SideNavbar";
+import { useEffect, useState } from "react";
+import fireBaseManager from "./components/firebase/FileGetter";
 import "./app.css";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const processFiles = async () => {
+      const files = await fireBaseManager.processFileSystem(FileList);
+      setLoading(false);
+    };
+    processFiles();
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="app">
-        {/* <div className="sidebar">
-          <SideNavbar />
-        </div> */}
         <div className="maincontent">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/experience" element={<Experience />} />
-          </Routes>
+          {loading ? <div>Loading</div> : <Home />}
         </div>
       </div>
     </BrowserRouter>

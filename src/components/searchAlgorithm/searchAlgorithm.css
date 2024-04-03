@@ -4,7 +4,8 @@
   flex-direction: column;
   padding: 1vh;
   height: 90%;
-  width: 95%;
+  width: 97%;
+  border: 3px solid black;
   /* align-self: flex-end; */
   /* margin: 2vh; */
 }

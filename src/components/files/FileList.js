@@ -1,18 +1,6 @@
-export const fileFormatTypes = {
-  APP: "app",
-  FOLDER: "folder",
-};
+import { Experience } from "./Experience";
 
-export const componentListStrings = {
-  MUSICPLAYER: "musicPlayer",
-  PHOTOVIEWER: "photoViewer",
-  PDFVIEWER: "pdfViewer",
-  VSCODE: "vscode",
-  FOLDERVIEWER: "folderViewer",
-  VIDEOVIEWER: "videoViewer",
-  TEXTEDITOR: "textEditor",
-  SEARCHALGORITHM: "searchAlgorithm",
-};
+import { fileFormatTypes, componentListStrings } from "./Formats";
 
 //basically each file/folder/app is going to be:
 /**
@@ -23,50 +11,32 @@ export const componentListStrings = {
  *  content: ?[]
  *  component: ?
  *  source: ?
+ *  online: ?
  *  }
- *
- *
  */
 
 const Desktop = {
   content: [
     {
       logo: "vscode.png",
-      fileName: "SearchAlgorthm.app",
-      type: fileFormatTypes.APP,
-      component: componentListStrings.SEARCHALGORITHM,
-    },
-    {
-      logo: "vscode.png",
       fileName: "vscode",
       type: fileFormatTypes.APP,
       component: componentListStrings.VSCODE,
+      online: false,
     },
-    {
-      logo: "folder.png",
-      fileName: "Experience",
-      type: fileFormatTypes.FOLDER,
-      content: [],
-    },
+    Experience,
     {
       logo: "folder.png",
       fileName: "Projects",
       type: fileFormatTypes.FOLDER,
+      online: false,
       content: [
         {
-          component: componentListStrings.FOLDERVIEWER,
-          logo: "folder.png",
-          type: fileFormatTypes.FOLDER,
-          fileName: "shubhResume.pdf",
-          content: [
-            {
-              logo: "pdf.png",
-              component: componentListStrings.PDFVIEWER,
-              type: fileFormatTypes.APP,
-              fileName: "shubhResume.pdf",
-              source: "svresume.pdf",
-            },
-          ],
+          logo: "search.png",
+          fileName: "Search Algorithm",
+          type: fileFormatTypes.APP,
+          component: componentListStrings.SEARCHALGORITHM,
+          online: false,
         },
       ],
     },
@@ -74,6 +44,7 @@ const Desktop = {
       logo: "folder.png",
       fileName: "Resume",
       type: fileFormatTypes.FOLDER,
+      online: false,
       content: [
         {
           logo: "pdf.png",
@@ -81,6 +52,7 @@ const Desktop = {
           type: fileFormatTypes.APP,
           fileName: "shubhResume.pdf",
           source: "svresume.pdf",
+          online: false,
         },
       ],
     },
@@ -88,35 +60,15 @@ const Desktop = {
       logo: "folder.png",
       fileName: "Pictures",
       type: fileFormatTypes.FOLDER,
-      content: [
-        {
-          logo: "image.png",
-          component: componentListStrings.PHOTOVIEWER,
-          type: fileFormatTypes.APP,
-          fileName: "shubhandchirag.png",
-          source: "friends.jpg",
-        },
-        {
-          logo: "image.png",
-          component: componentListStrings.PHOTOVIEWER,
-          type: fileFormatTypes.APP,
-          fileName: "shubh.jpg",
-          source: "shubh.jpg",
-        },
-        {
-          logo: "image.png",
-          component: componentListStrings.PHOTOVIEWER,
-          type: fileFormatTypes.APP,
-          fileName: "Hyderabag.jpg",
-          source:
-            "https://lh3.google.com/u/0/d/1xN-9L1KdncyRcKvyeW39QMCrbfC1f5RA=w3141-h2028-iv1",
-        },
-      ],
+      online: true,
+      content: [],
+      source: "images",
     },
     {
       logo: "folder.png",
       fileName: "fav songs",
       type: fileFormatTypes.FOLDER,
+      online: false,
       content: [
         {
           logo: "mp3.png",
@@ -131,6 +83,7 @@ const Desktop = {
       logo: "folder.png",
       fileName: "Videos",
       type: fileFormatTypes.FOLDER,
+      online: false,
       content: [
         {
           logo: "MP4.png",
@@ -138,18 +91,21 @@ const Desktop = {
           type: fileFormatTypes.APP,
           fileName: "RapVideo.mp4",
           source: "https://youtu.be/QtIwRZehAG0?feature=shared",
+          online: true,
         },
       ],
     },
   ],
-  logo: "folder.png",
+  logo: "desktop.png",
   fileName: "Desktop",
   type: fileFormatTypes.FOLDER,
+  online: false,
 };
 const Documents = {
-  logo: "folder.png",
+  logo: "document.png",
   fileName: "Documents",
   type: fileFormatTypes.FOLDER,
+  online: false,
   content: [
     {
       logo: "notepad.webp",
@@ -157,6 +113,7 @@ const Documents = {
       type: fileFormatTypes.APP,
       fileName: "yo.txt",
       source: "Hey hello",
+      online: false,
     },
   ],
 };
@@ -167,6 +124,7 @@ export const FileList = [
     fileName: "Home",
     type: fileFormatTypes.FOLDER,
     content: [Desktop, Documents],
+    online: false,
   },
   Desktop,
   Documents,

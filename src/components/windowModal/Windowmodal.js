@@ -17,8 +17,7 @@ import TextEditor from "../textEditor/TextEditor";
 import VsCodeWindow from "../vscodeWindow/VsCodeWindow";
 import VideoViewer from "../videoViewer/VideoViewer";
 
-import { fileFormatTypes } from "../files/FileList";
-import { componentListStrings } from "../files/FileList";
+import { fileFormatTypes, componentListStrings } from "../files/Formats";
 import SearchAlgorithm from "../searchAlgorithm/SearchAlgorithm";
 
 const WindowModal = (props) => {
@@ -42,7 +41,9 @@ const WindowModal = (props) => {
     event.stopPropagation();
   };
 
-  useEffect(() => {}, [isFullScreen]);
+  useEffect(() => {
+    console.log("props for a window: ", props);
+  }, []);
 
   useEffect(() => {
     setIsBackButtonDisabled(currentDirectoryIndex.current === 0);
@@ -54,6 +55,7 @@ const WindowModal = (props) => {
   }, [selectedDirectory]);
 
   const handleTopBarMouseDown = (e) => {
+    e.stopPropagation();
     if (isFullScreen) {
       setHeight("80%");
       setWidth("80%");
@@ -239,7 +241,8 @@ const WindowModal = (props) => {
       id="modal"
       style={{
         display: props.show ? "block" : "none",
-        zIndex: props.numWindowsOpen ? props.numWindowsOpen : 1,
+        top: `${props.windowCount ? (props.windowCount % 10) * 3 + 10 : 10}vh`,
+        left: `${props.windowCount ? (props.windowCount % 10) * 3 + 10 : 15}vw`,
         height: height ? height : "50%",
         width: width ? width : "60%",
         zIndex: props.zvalue,

@@ -2,12 +2,13 @@
 .modal {
   position: absolute; /* Stay in place */
   z-index: 1; /* Sit on top */
-  top: 10vh;
-  left: 15vw;
+  /* top: 10vh;
+  left: 15vw; */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(59, 59, 59);
   border: 0.2em solid #0011ff;
   background-color: #0011ff;
+  border-radius: 5px;
   box-shadow: 20px 20px 50px 15px black;
   box-sizing: border-box;
 }
@@ -22,7 +23,7 @@
 .modalTopbar {
   overflow: hidden;
   display: flex;
-  height: 2vh;
+  height: 3.5vh;
   position: relative;
   background-color: #0011ff;
   border: 1px solid #0011ff;
@@ -52,13 +53,13 @@
 }
 
 .modalTopBarIcon {
-  height: 1.5vh;
+  height: 100%;
 }
 
 .modalTopbarFilenameText {
   color: #ffffff;
-  font-size: 1.5vh;
-  margin-left: 0.2vw;
+  font-size: 1.7vh;
+  margin-left: 0.4vw;
 }
 .topbarTools {
   /* position:absolute; */
@@ -76,9 +77,9 @@
 
 .topbarToolsButton {
   color: #ffffff;
-  width: 1.8vh;
+  width: 4vh;
   height: 100%;
-  margin-left: 0.1vw;
+  margin-left: 0.2vw;
   border: 1px solid white;
   display: flex;
   justify-content: center;

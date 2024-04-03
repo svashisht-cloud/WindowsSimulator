@@ -1,36 +1,57 @@
 :root {
-    --file-hover-background-color: rgba(255,255,255,0.4);
-    --file-selected-background-color: rgba(223, 85, 55, 0.4);
-    --main-text-color: #fff;
-  }
-.windowsFile:hover{
-    /* border: 1px solid black; */
-    background-color: var(--file-hover-background-color);
-    background-blend-mode: screen;
-    border: 2px solid rgb(255, 255, 255);
-    box-sizing: border-box;
+  --file-hover-background-color: rgba(255, 255, 255, 0.4);
+  --file-selected-background-color: rgba(223, 85, 55, 0.4);
+  --main-text-color: #fff;
+}
+.windowsFile:hover {
+  /* border: 1px solid black; */
+  background-color: var(--file-hover-background-color);
+  background-blend-mode: screen;
+  border: 2px solid rgb(255, 255, 255);
+  box-sizing: border-box;
 }
 
-.windowsFile{
-    position: absolute;
-    top:  5vh;
-    left: 5vw
+.windowsFile {
+  margin: 2vh;
+  display: inline-block;
+  /* border: 1px solid black; */
+  height: 12vh;
+  width: 10vh;
+  overflow: hidden;
+  text-align: center;
+  position: absolute;
+  top: 5vh;
+  left: 5vw;
 }
 
 .windowsFileLogo {
-    height: 5vh;
-    pointer-events: none;
+  height: 6vh;
+  pointer-events: none;
 }
 
 .windowsFileText {
-    font-size: 1.5vh;
-    color: rgb(255, 255, 255);
-    text-shadow: 1px 1px 2px black;
-    pointer-events: none;
+  font-size: 1.5vh;
+  text-wrap: wrap;
+  word-wrap: break-word;
+  height: 4vh;
+  color: rgb(0, 0, 0);
+  pointer-events: none;
+}
+
+.fileOnDesktop {
+  /* font-size: 1.5vh;
+  text-wrap: wrap;
+  word-wrap: break-word; */
+  /* height: 4vh; */
+  font-size: 1.5vh;
+  text-shadow: 1px 1px 2px black;
+  color: rgb(255, 255, 255);
+  /* text-shadow: 1px 1px 2px black;
+  pointer-events: none; */
 }
 
 .selectedWindowFile {
-    background-color: var(--file-selected-background-color);
-    background-blend-mode: screen;
-    border: 1px;
+  background-color: var(--file-selected-background-color);
+  background-blend-mode: screen;
+  border: 1px;
 }

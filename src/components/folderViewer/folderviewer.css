@@ -5,7 +5,7 @@
 }
 
 .folderViewerSideBar {
-  width: 6vw;
+  width: 8vw;
   background-color: rgb(221, 221, 221);
 }
 
@@ -19,7 +19,7 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  height: 3vh;
+  height: 5vh;
 }
 
 .folderViewerSideBarDirectoryElement:hover {
@@ -36,7 +36,7 @@
   margin-left: 0.3vw;
 }
 .folderViewerSideBarDirectoryLogoImage {
-  height: 60%;
+  height: 70%;
 }
 
 .folderViewerSideBarDirectoryName {
@@ -44,5 +44,5 @@
   justify-content: center;
   align-items: center;
   margin-left: 0.3vw;
-  font-size: 1.2vh;
+  font-size: 1.8vh;
 }
