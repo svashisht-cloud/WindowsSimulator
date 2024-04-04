@@ -4,7 +4,6 @@ import "./folderviewer.css";
 import File from "../files/File";
 import { fileFormatTypes, componentListStrings } from "../files/Formats";
 import { FileList } from "../files/FileList";
-import FirebaseManager from "../firebase/FileGetter";
 
 const FolderViewer = (props) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -19,24 +18,6 @@ const FolderViewer = (props) => {
       100;
     setCurrentWidth(width);
   }, [mainContentDiv.current, props.parentWidth]);
-
-  useEffect(() => {
-    console.log("folder viewer useEffect");
-    // if (props.directory.online) {
-    //   console.log("folder viewer useEffect 2");
-    //   const getContent = async () => {
-    //     const files = await FirebaseManager.listDirectoryContent(
-    //       props.directory.source
-    //     );
-    //     const newContent = files.map((file) => createNewFile(file));
-    //     setCurrentContent((content) => [...content, ...newContent]);
-    //   };
-
-    //   getContent();
-    // } else {
-    //   setCurrentContent((content) => []);
-    // }
-  }, [props.directory]);
 
   const handleFileSelection = (fileName) => {
     if (fileName === null) setSelectedFile(null);
@@ -84,27 +65,8 @@ const FolderViewer = (props) => {
         (mainContentDiv.current.getBoundingClientRect().width /
           window.innerWidth) *
         100;
-      console.log("width: ", width);
       return width;
     } else return 0;
-  };
-
-  const getFileComponent = (contentType) => {
-    if (contentType === "image/png") {
-      return componentListStrings.PHOTOVIEWER;
-    }
-  };
-
-  const createNewFile = (fileSource) => {
-    return {
-      logo: "image.png",
-      fileName: fileSource.metadata.name,
-      component: getFileComponent(fileSource.metadata.contentType),
-      type: fileFormatTypes.APP,
-      online: true,
-      content: [],
-      source: fileSource.url,
-    };
   };
 
   const getFilesandFolders = () => {

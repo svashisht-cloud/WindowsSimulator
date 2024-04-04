@@ -1,0 +1,55 @@
+.LoadingScreen {
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.LoadingScreenContents {
+  /* background-color: grey; */
+  height: 70%;
+  width: 50%;
+  display: flex;
+  object-fit: contain;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+.LoadingScreenWindowsLogo {
+  display: flex;
+  flex: 1;
+  /* background-color: grey; */
+  justify-content: center;
+  min-width: 0;
+}
+
+.windowsLoadingLogo {
+  height: 50vh;
+}
+
+.LoadingScreenLoadingBarContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.LoadingScreenLoadingBar {
+  height: 3vh;
+  width: 50%;
+  border: 2px solid white;
+  border-radius: 5px;
+  display: flex;
+}
+
+.LoadingBarElement {
+  flex: 1;
+}
+
+.activeLoadingBarElement {
+  background-color: rgb(11, 144, 205);
+  margin: 0.2vh;
+}

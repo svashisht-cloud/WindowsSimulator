@@ -3,6 +3,7 @@ import { FileList } from "./components/files/FileList";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import fireBaseManager from "./components/firebase/FileGetter";
+import LoadingScreen from "./components/loadingScreen/LoadingScreen";
 import "./app.css";
 
 function App() {
@@ -11,7 +12,9 @@ function App() {
     const processFiles = async () => {
       const files = await fireBaseManager.processFileSystem(FileList);
       setLoading(false);
+      console.log("loading end", new Date().toLocaleTimeString());
     };
+    console.log("loading start", new Date().toLocaleTimeString());
     processFiles();
   }, []);
 
@@ -19,7 +22,7 @@ function App() {
     <BrowserRouter>
       <div className="app">
         <div className="maincontent">
-          {loading ? <div>Loading</div> : <Home />}
+          {loading ? <LoadingScreen /> : <Home />}
         </div>
       </div>
     </BrowserRouter>
