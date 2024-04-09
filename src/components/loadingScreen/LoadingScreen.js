@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 const LoadingScreen = (props) => {
   const [loadingBars, setLoadingBars] = useState([
-    0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   ]);
 
   useEffect(() => {

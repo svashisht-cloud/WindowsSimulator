@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import "./folderviewer.css";
 import File from "../files/File";
 import { fileFormatTypes, componentListStrings } from "../files/Formats";
-import { FileList } from "../files/FileList";
+import Filelistmanager from "../../managers/FileListManager";
 
 const FolderViewer = (props) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -41,7 +41,7 @@ const FolderViewer = (props) => {
   };
 
   const getFolderSideBar = () => {
-    return FileList.map((ell) => (
+    return Filelistmanager.getFileList().map((ell) => (
       <div
         className="folderViewerSideBarDirectoryElement"
         onClick={(event) => props.handleSidebarSelection(event, ell)}

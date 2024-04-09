@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 
 import "./searchAlgorithm.css";
+import Home from "../Home";
 
 const SearchAlgorithm = () => {
   const numRows = 20;
@@ -10,6 +11,7 @@ const SearchAlgorithm = () => {
 
   const algorithm = useRef("DFS");
   const target = 4;
+
   useEffect(() => {
     resetBoard();
   }, []);

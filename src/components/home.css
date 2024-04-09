@@ -1,5 +1,5 @@
 .homeScreen {
-  background-image: url("https://freight.cargo.site/t/original/i/a9f227752a9ba3bc689092085a7e6eb87b787abd858c3e3f0aebdc6a40f138d0/Windows_Final_3840p_v10_opt.png");
+  background-image: url("https://wallpapercave.com/wp/wp2578195.jpg");
   background-size: cover;
 
   background-repeat: no-repeat;
@@ -26,4 +26,107 @@
   left: 50vw;
   top: 50vh;
   z-index: 500;
+}
+
+.handleLogoutMenu {
+  display: flex;
+  position: absolute;
+  height: 30%;
+  width: 30%;
+  top: 35%;
+  left: 35%;
+
+  background-color: #009dff;
+  border: 4px solid white;
+  border-radius: 5px;
+  flex-direction: column;
+  z-index: 100000;
+}
+
+.logoutMenuTopBar {
+  flex: 1;
+  background-color: #386af2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 2vw;
+  color: white;
+  font-size: 3vh;
+}
+
+.logoutMenuNotification {
+  flex: 3;
+  background-color: #0011ff;
+  display: flex;
+}
+
+.logoutMenuNotificationIcon {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.logoutMenuNotificationText {
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin: 1vh;
+}
+
+.logoutMenuOptions {
+  flex: 1;
+  background-color: #386af2;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+}
+
+.logoutMenuOptionsContainer {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.logoutMenuOptionsButton {
+  margin: 1vh;
+  height: 60%;
+  width: 30%;
+  background-color: none;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+.logoutMenuOptionsButton:hover {
+  background-color: rgba(128, 128, 128, 0.597);
+}
+
+.finalLogingOutDiv {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.finalLogingOutDivText {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 3vh;
+}
+
+.finalLogingOutDivAnimation {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2vh;
 }

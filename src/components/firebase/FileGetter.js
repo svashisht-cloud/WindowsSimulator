@@ -14,6 +14,7 @@ class FirebaseManager {
     this.fileToLinkDictionary = new Map();
     this.sourceToContentMap = new Map();
     this.updateCallbackQueue = new Map();
+    this.localStorageKey = "fileSystemJSON";
     this.loading = true;
   }
 
@@ -48,7 +49,20 @@ class FirebaseManager {
     }
   };
 
+  checkLocalStorage = () => {
+    const localFiles = localStorage.getItem(this.localStorageKey);
+    return localFiles;
+  };
+
+  removeLocalStorageCache = () => {
+    localStorage.removeItem(this.localStorageKey);
+  };
+
   processFileSystem = async (fileList) => {
+    const localFiles = this.checkLocalStorage();
+    if (localFiles) {
+      return JSON.parse(localFiles);
+    }
     const callback = async (fileList) => {
       const newFileList = [];
       for (let i = 0; i < fileList.length; ++i) {
@@ -81,7 +95,11 @@ class FirebaseManager {
       return newFileList;
     };
     this.loading = false;
-    return await callback(fileList);
+    const result = await callback(fileList);
+    console.log("result: ", result);
+    console.log("whatsup gang: ", typeof result);
+    localStorage.setItem(this.localStorageKey, JSON.stringify(result));
+    return result;
   };
 
   createNewFile = (fileSource) => {

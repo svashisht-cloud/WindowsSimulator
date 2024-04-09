@@ -1,8 +1,13 @@
 import "./startmenu.css";
 import { TiKeyOutline } from "react-icons/ti";
+import authenticationManager from "../../managers/AuthenticationManager";
+import { useEffect } from "react";
 
 import { StartButtonOptions } from "../files/FileList";
 const StartMenu = (props) => {
+  useEffect(() => {
+    console.log("auth: ", authenticationManager.currentUser);
+  }, []);
   const getStartMenuContents = () => {
     return StartButtonOptions.map((ell) => (
       <div
@@ -35,11 +40,17 @@ const StartMenu = (props) => {
               className="profilePicStartMenu"
               // style={horizontal ? { width: "100%" } : { height: "100%" }}
               // style={{ height: "100%" }}
-              src="shubh.jpg"
+              src={
+                authenticationManager.currentUser &&
+                authenticationManager.currentUser.pic
+              }
               unselectable="on"
             ></img>
           </div>
-          <div className="userProfileName">Guest</div>
+          <div className="userProfileName">
+            {authenticationManager.currentUser &&
+              authenticationManager.currentUser.name}
+          </div>
         </div>
         <div className="startMenuContents">{getStartMenuContents()}</div>
         <div className="startMenuSingingOptions">
@@ -50,7 +61,12 @@ const StartMenu = (props) => {
               <div className="logoutKeyLogo">
                 <TiKeyOutline />
               </div>
-              <div className="logoffButtonString">Log off</div>
+              <div
+                className="logoffButtonString"
+                onClick={() => props.handleLogOut()}
+              >
+                Log off
+              </div>
             </div>
           </div>
         </div>

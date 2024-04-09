@@ -1,5 +1,3 @@
-import { FileList } from "./files/FileList";
-
 import { useCallback, useEffect, useState, useRef, useContext } from "react";
 
 import File from "./files/File";
@@ -7,10 +5,13 @@ import Taskbar from "./Taskbar/Taskbar";
 import WindowModal from "./windowModal/Windowmodal";
 import StartMenu from "./startMenu/StartMenu";
 import { v4 as uuidv4 } from "uuid";
+import Filelistmanager from "../managers/FileListManager";
+import { GoQuestion } from "react-icons/go";
+import { FadeLoader } from "react-spinners";
 
 import "./home.css";
 
-const Home = () => {
+const Home = (props) => {
   //State
   const [selectedFile, setSelectedFile] = useState(null);
   const [files, setFiles] = useState(null);
@@ -18,12 +19,17 @@ const Home = () => {
   const [topCount, setTopCount] = useState(10);
   const [showStartMenu, setshowStartMenu] = useState(false);
   const [showContextMenu, setShowContextMenu] = useState(false);
+  const [showHandleLogoutMenu, setShowHandleLogoutMenu] = useState(false);
+  const [logoutLoading, setLogoutLoading] = useState(false);
+  const [contextMenuCoordinates, setContextMenuCoordinates] = useState([0, 0]);
+
   const windowCountRef = useRef(0);
 
   const contextMenuPosition = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    setFiles(FileList.filter((ell) => ell.fileName === "Desktop")[0].content);
+    const files = Filelistmanager.getFileList();
+    setFiles(files.filter((ell) => ell.fileName === "Desktop")[0].content);
   }, []);
 
   useEffect(() => {
@@ -31,14 +37,13 @@ const Home = () => {
   }, [windowModalMap]);
 
   const getContextMenu = () => {
-    // console.log(showContextMenu);
     return (
       <div
         className="contextMenu"
         style={{
-          display: showContextMenu ? "block" : "none",
-          top: `${contextMenuPosition.current.y}px`,
-          left: `${contextMenuPosition.current.x}px`,
+          display: showContextMenu ? "flex" : "none",
+          top: `${contextMenuCoordinates[1]}px`,
+          left: `${contextMenuCoordinates[0]}px`,
         }}
       >
         context Menu
@@ -148,13 +153,13 @@ const Home = () => {
     //   handleFileSelection(null);
     // }
     // setWindowModalOpen(false);
+    setShowContextMenu(false);
     closeStartMenuIfOpen();
   };
 
   const handleContextMenuClick = (event) => {
     // event.preventDefault();
-    // contextMenuPosition.current.x = event.clientX;
-    // contextMenuPosition.current.y = event.clientY;
+    // setContextMenuCoordinates(event.clientX, event.clientY);
     // setShowContextMenu(true);
   };
 
@@ -180,15 +185,82 @@ const Home = () => {
     setTopCount((topCount) => topCount + 1);
   };
 
+  const handleLogOut = () => {
+    // props.handleLogOut
+    setShowHandleLogoutMenu(true);
+  };
+
+  const getHandleLogoutMenu = () => {
+    const handleCancel = () => {
+      setShowHandleLogoutMenu(false);
+    };
+
+    const handleLogoff = () => {
+      setLogoutLoading(true);
+      setTimeout(() => {
+        setLogoutLoading(false);
+        setShowHandleLogoutMenu(false);
+        props.handleLogOut();
+      }, 3000);
+    };
+
+    return (
+      <div className="handleLogoutMenu">
+        <div className="logoutMenuTopBar">Log off</div>
+        <div className="logoutMenuNotification">
+          {logoutLoading && (
+            <div className="finalLogingOutDiv">
+              <div className="finalLogingOutDivText">Logging Out.</div>
+              <div className="finalLogingOutDivAnimation">
+                <FadeLoader
+                  className="fadeLoaderLogout"
+                  color={"white"}
+                  loading={true}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              </div>
+            </div>
+          )}
+          {!logoutLoading && (
+            <div className="logoutMenuNotificationIcon">
+              <GoQuestion size="3em" />
+            </div>
+          )}
+          {!logoutLoading && (
+            <div className="logoutMenuNotificationText">
+              Are you sure you want to log out of this amazing porfolio?
+            </div>
+          )}
+        </div>
+        <div className="logoutMenuOptions">
+          <div className="logoutMenuOptionsContainer">
+            {!logoutLoading && (
+              <div className="logoutMenuOptionsButton" onClick={handleCancel}>
+                Cancel
+              </div>
+            )}
+            {!logoutLoading && (
+              <div className="logoutMenuOptionsButton" onClick={handleLogoff}>
+                Log off
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const getOS = () => {
     return (
       <div className="homeScreen">
+        {showHandleLogoutMenu && getHandleLogoutMenu()}
         <div
           className="homeScreenMainContent"
           onClick={(e) => handleWindowClick(e)}
           onContextMenu={(e) => handleContextMenuClick(e)}
         >
-          {showContextMenu && getContextMenu()}
+          {/* {showContextMenu && getContextMenu()} */}
           {windowModalMap &&
             windowModalMap.map((ell) => {
               return (
@@ -229,6 +301,7 @@ const Home = () => {
         <StartMenu
           show={showStartMenu}
           openNewWindow={(content) => openNewWindow(content)}
+          handleLogOut={() => handleLogOut()}
         />
         <Taskbar
           openWindows={windowModalMap}
