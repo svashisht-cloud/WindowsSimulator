@@ -202,3 +202,20 @@
   color: white;
   font-size: 2.8vh;
 }
+
+.signInHint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin: 1vh 0;
+}
+
+.signInHintButton {
+  background: none;
+  border: none;
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: inherit;
+}

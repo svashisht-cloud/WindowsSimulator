@@ -13,6 +13,7 @@ const LoginScreen = (props) => {
   });
 
   const [incorrectPassword, setIncorrectPassword] = useState(false);
+  const [showHint, setShowHint] = useState(false);
 
   const passwordRef = useRef("");
 
@@ -64,6 +65,7 @@ const LoginScreen = (props) => {
 
   const handleReturnToUsers = () => {
     setCurrentState(0);
+    setShowHint(false);
   };
 
   const handleSignIn = () => {
@@ -118,6 +120,21 @@ const LoginScreen = (props) => {
         {incorrectPassword && (
           <div className="signInIncorrectPassword">Incorrect Password</div>
         )}
+        <div className="signInHint">
+          {showHint ? (
+            <span>
+              Hint: the password is{" "}
+              <strong>{process.env.REACT_APP_SVASHISHT_PASSWORD}</strong>
+            </span>
+          ) : (
+            <button
+              className="signInHintButton"
+              onClick={() => setShowHint(true)}
+            >
+              Show password hint
+            </button>
+          )}
+        </div>
         <div className="returnToUsers">
           <button className="returnToUsersButton" onClick={handleReturnToUsers}>
             Return to users
