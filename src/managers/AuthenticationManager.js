@@ -1,7 +1,5 @@
 import users from "../users/userlist";
 
-import fireBaseManager from "../components/firebase/FileGetter";
-
 class AuthenticationManager {
   constructor() {
     this.currentUser = null;
@@ -42,7 +40,6 @@ class AuthenticationManager {
     const isExpired = timeDifference / (1000 * 60) > 30;
     if (isExpired) {
       localStorage.removeItem(this.authenticationLocalStorageKey);
-      fireBaseManager.removeLocalStorageCache();
       return false;
     }
     const user = localStorageData.user;

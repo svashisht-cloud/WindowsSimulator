@@ -1,10 +1,8 @@
 import Home from "./components/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
-import fireBaseManager from "./components/firebase/FileGetter";
 import LoadingScreen from "./components/loadingScreen/LoadingScreen";
 import "./app.css";
-import Filelistmanager from "./managers/FileListManager";
 import LoginScreen from "./components/loginScreen/LoginScreen";
 import authenticationManager from "./managers/AuthenticationManager";
 
@@ -16,14 +14,9 @@ function App() {
     if (authenticated) {
       setSignedIn(true);
     }
-    const processFiles = async () => {
-      const new_files = await fireBaseManager.processFileSystem(
-        Filelistmanager.getFileList()
-      );
-      Filelistmanager.setFileList(new_files);
-      setLoading(false);
-    };
-    if (!signedIn) processFiles();
+    // Files are bundled with the app now, so just show the boot screen briefly.
+    const bootTimer = setTimeout(() => setLoading(false), 2500);
+    return () => clearTimeout(bootTimer);
   }, []);
 
   const handleSignIn = (userName, password = "") => {

@@ -1,5 +1,15 @@
 import { fileFormatTypes, componentListStrings } from "./Formats";
 
+const image = (fileName, source) => ({
+  logo: source,
+  fileName,
+  component: componentListStrings.PHOTOVIEWER,
+  type: fileFormatTypes.APP,
+  online: false,
+  content: [],
+  source,
+});
+
 export const Experience = {
   logo: "folder.png",
   fileName: "Experience",
@@ -14,7 +24,7 @@ export const Experience = {
       content: [
         {
           logo: "folder.png",
-          fileName: "Remote_Assist",
+          fileName: "Docklight Assist",
           type: fileFormatTypes.FOLDER,
           online: false,
           content: [
@@ -22,41 +32,19 @@ export const Experience = {
               logo: "folder.png",
               fileName: "Images",
               type: fileFormatTypes.FOLDER,
-              online: true,
-              content: [],
-              source: "Experience/Outrider/Remote Assist/images",
-            },
-          ],
-        },
-        {
-          logo: "folder.png",
-          fileName: "Lidar Packet Bagger",
-          type: fileFormatTypes.FOLDER,
-          online: false,
-          content: [
-            {
-              logo: "folder.png",
-              fileName: "Images",
-              type: fileFormatTypes.FOLDER,
-              online: true,
-              content: [],
-              source: "Experience/Outrider/Lidar_packet_bagger/images",
-            },
-          ],
-        },
-        {
-          logo: "folder.png",
-          fileName: "Event Logger",
-          type: fileFormatTypes.FOLDER,
-          online: false,
-          content: [
-            {
-              logo: "folder.png",
-              fileName: "Images",
-              type: fileFormatTypes.FOLDER,
-              online: true,
-              content: [],
-              source: "Experience/Outrider/Event_logger/images",
+              online: false,
+              content: [
+                image("1-event-list.png", "docklight-assist/1-event-list.png"),
+                image("2-mission-ids.png", "docklight-assist/2-mission-ids.png"),
+                image(
+                  "3-process-queue.png",
+                  "docklight-assist/3-process-queue.png"
+                ),
+                image(
+                  "4-extraction-log.png",
+                  "docklight-assist/4-extraction-log.png"
+                ),
+              ],
             },
           ],
         },

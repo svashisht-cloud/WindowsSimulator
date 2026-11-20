@@ -15,6 +15,16 @@ import { fileFormatTypes, componentListStrings } from "./Formats";
  *  }
  */
 
+const picture = (fileName) => ({
+  logo: `pictures/${fileName}`,
+  fileName,
+  component: componentListStrings.PHOTOVIEWER,
+  type: fileFormatTypes.APP,
+  online: false,
+  content: [],
+  source: `pictures/${fileName}`,
+});
+
 const Desktop = {
   content: [
     {
@@ -60,9 +70,12 @@ const Desktop = {
       logo: "folder.png",
       fileName: "Pictures",
       type: fileFormatTypes.FOLDER,
-      online: true,
-      content: [],
-      source: "images",
+      online: false,
+      content: [
+        picture("IMG_9169.jpg"),
+        picture("friends.jpg"),
+        picture("shubh.jpg"),
+      ],
     },
     {
       logo: "folder.png",
@@ -76,6 +89,13 @@ const Desktop = {
           type: fileFormatTypes.APP,
           fileName: "HotlineBling",
           source: "hotlinebling.mp3",
+        },
+        {
+          logo: "mp3.png",
+          component: componentListStrings.MUSICPLAYER,
+          type: fileFormatTypes.APP,
+          fileName: "Trimski",
+          source: "trimski.mp3",
         },
       ],
     },
