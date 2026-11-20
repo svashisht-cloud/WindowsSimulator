@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import "./windowmodal.css";
 import { RxCross1 } from "react-icons/rx";
 import {
@@ -10,15 +10,17 @@ import {
 import { SlArrowLeftCircle, SlArrowRightCircle } from "react-icons/sl";
 
 import FolderViewer from "../folderViewer/FolderViewer";
-import MusicPlayer from "../musicplayer/MusicPlayer";
 import PhotoViewer from "../photoviewer/photoviewer";
 import PdfViewer from "../pdfviewer/PdfViewer";
-import TextEditor from "../textEditor/TextEditor";
-import VsCodeWindow from "../vscodeWindow/VsCodeWindow";
-import VideoViewer from "../videoViewer/VideoViewer";
-
 import { fileFormatTypes, componentListStrings } from "../files/Formats";
 import SearchAlgorithm from "../searchAlgorithm/SearchAlgorithm";
+
+// Heavy viewers (CodeMirror, Howler, react-player) load only when first opened.
+const MusicPlayer = lazy(() => import("../musicplayer/MusicPlayer"));
+const TextEditor = lazy(() => import("../textEditor/TextEditor"));
+const VsCodeWindow = lazy(() => import("../vscodeWindow/VsCodeWindow"));
+const VideoViewer = lazy(() => import("../videoViewer/VideoViewer"));
+
 
 const WindowModal = (props) => {
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -289,7 +291,9 @@ const WindowModal = (props) => {
             </div>
           </div>
         </div>
-        <div className="modalContent">{getModalContent()}</div>
+        <div className="modalContent">
+          <Suspense fallback={null}>{getModalContent()}</Suspense>
+        </div>
       </div>
     </div>
   );
